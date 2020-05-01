@@ -1,1 +1,1 @@
-web: gunicorn adoptacat.wsgi --log-file
+web: gunicorn adoptacat.wsgi --log-file -
