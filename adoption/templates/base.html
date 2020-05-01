@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% block title %}AdoptaCat{% endblock %}</title>
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body{
+        font-family: 'Prompt', sans-serif;
+        }
+        .masthead {
+        height: 100vh;
+        min-height: 500px;
+        background-image: url('https://images.pexels.com/photos/460797/pexels-photo-460797.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/business-frontpage.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a  style="color: rgb(251, 160, 127); text-shadow: 2px 2px 5px grey;" class="navbar-brand" href="{% url 'home' %}">AdoptaCat</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item ">
+            <a class="nav-link" href="{% url 'home' %}">หน้าแรก
+    
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'catlist' %}">แมวทั้งหมด</a>
+          </li>
+          {% if user.is_authenticated %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" style="color: white;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {{ user.username|capfirst }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'addcat' %}">เพิ่มแมว</a>
+                  <a class="dropdown-item" href="{% url 'mycatlist' %}">ดูแมวของฉัน</a>
+                  <a class="dropdown-item" href="{% url 'myrequest_list' %}">ดูคำขอของฉัน</a>
+                  <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'profile' %}">ดูโปรไฟล์</a>
+                    <a class="dropdown-item" href="{% url 'password_change' %}">เปลี่ยนรหัสผ่าน</a>
+                    <a class="dropdown-item" href="{% url 'logout' %}">ออกจากระบบ</a>
+                  </div>
+                  
+              </li>
+              {% else %}
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" style="color: white;" href="{% url 'login' %}">เข้าสู่ระบบ</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link"  style="color: white;" href="{% url 'signup' %}">สมัครสมาชิก</a>
+                  </li>
+                </ul>
+              {% endif %}
+        </ul>
+      </div>
+
+    </div>
+    </nav>
+  
+        {% block content %}
+        {% endblock %}
+
+  <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+        <p class="m-0 text-center text-white">For <a href="{% url 'admin:index' %}">admin</a></p>
+        </div>
+        <!-- /.container -->
+    </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}AdoptaCat | เข้าสู่ระบบ!{% endblock %}
+{% block content %}
+<br>
+<div class="container">
+    <div class="card" style="width: 98%; ">
+        <div class="card-body" style="text-align:center;">
+            <h3>เข้าสู่ระบบ</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-success" type="submit" >ยืนยัน</button>
+    
+            <p><div class="card"style="text-align:center; border-width: 2px;">
+            </p>
+                <div>
+                    <p>ไม่มีบัญชีผู้ใช้ <strong><a style="color:rgb(77, 150, 219);" href="{% url 'signup' %}">สมัครสมาชิก</a> </strong>เลย!</p>
+                </div>
+            </p>
+            </div>
+            </p>
+        </div>
+        </form>
+    </div>
+</div>
+    
+{% endblock %}

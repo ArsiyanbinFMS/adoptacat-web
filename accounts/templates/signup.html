@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}AdoptCat | สมัครสมาชิก!{% endblock %}
+
+
+{% block content %}
+<br>
+<div class="container">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissable" role="alert">
+                <button class="close" data-dismiss="alert">
+                    <small><sup>x</sup></small>
+                </button>
+                {{ message }}
+            </div>
+        {% endfor%}
+    {% endif %}
+    <h1>สมัครสมาชิก</h1>
+    <p>กรุณากรอกข้อมูลเพื่อสมัครสมาชิก</p>
+    <div class="card" style="border-width: 10px;">
+        <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p> อายุ  : {{ profile_form.age}} </p>
+            <p> ที่อยู่  :{{ profile_form.location}}</p>
+            <p> หมายเลขโทรศัพท์ : {{ profile_form.phone}}</p>
+            <p> รูปโปรไฟล์ : {{ profile_form.image}} </p>
+            <button class="btn btn-success" type="submit" >สมัครสมาชิก</button>
+            &emsp;| มีบัญชีผู้ใช้แล้ว <a href="{% url 'login' %}" >เข้าสู่ระบบเลย!</a>
+        </div>
+        </form>
+    </div>
+    <br>
+    
+</div>
+{% endblock %}

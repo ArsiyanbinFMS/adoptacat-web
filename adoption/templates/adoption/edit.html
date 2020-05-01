@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}AdoptCat | แก้ไขข้อมูลแมว!{% endblock %}
+{% block content %}
+<br></br>
+<div class="container" >
+    <div class="card" style="background-color:lightblue">
+    <form method="POST">
+        {% csrf_token %}
+            <p></p>
+            <h1 style="text-align: center;">แก้ไขข้อมูลแมว</h1>
+            <div class="card card-body">
+                {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        <strong>{{ error|escape }}</strong>
+                    </div>
+                {% endfor %}
+                {% endif %}
+            <div class="form-group" >
+                {% csrf_token %}
+                    <p>ชื่อ : &emsp;{{ form.name }}</p>
+                    <p>สถานะ : &emsp;{{ form.status }} ถูกรับเลี้ยงแล้ว</p>
+                    <p>อายุ  <small>(เดือน)</small> : &emsp;{{ form.age }}</p>
+                    <p>เพศ :&emsp;{{ form.gender }} </p>
+                    สี :&emsp;
+                        <div class="card-body">
+                        <div class="card-text">
+                            {{ form.color }}
+                        </div>
+                        </div>
+                        
+                        <p>สายพันธุ์ :&emsp;{{ form.breed }}</p>
+                        <p>วัคซีนที่เคยได้รับ :&emsp;{{ form.vaccines }}</p>
+                        <p>ลักษณะนิสัย :</p>{{ form.nature }}
+                        <br> 
+                        <p>Location <small>(ex. หาดใหญ่,สงขลา)</small>&emsp;:{{ form.location }}</p> 
+                        <p>แทรกรูปภาพแมว (ขนาด 300x200) &emsp;{{ form.image }}</p>
+            </div>
+    </div>
+    <center>
+        <input type="submit"class="btn btn-outline-success btn-lg"action="{% url 'mycatlist' %}" value="ยืนยัน">
+        &emsp;<a href="{% url 'mycatlist' %}">ยกเลิก</a>
+    </center>
+    </div>
+  
+  </form>
+</div>
+<br></br>
+{% endblock %}

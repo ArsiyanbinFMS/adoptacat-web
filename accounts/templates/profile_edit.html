@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}AdoptCat | แก้ไขโปรไฟล์{% endblock %}
+{% block content %}
+<br>
+<div class="container"> 
+    <div class="card card-body">
+    <div class="form-group">  
+    <h3>แก้ไขโปรไฟล์</h3>
+    <form method="post">
+        {% csrf_token %}
+        <p>รูปภาพ :{{ form.image }}</p>
+        <p>&emsp;อายุ :{{ form.age }}</p>
+        <p>&emsp;Location :{{ form.location }}</p>
+        <p>&emsp;หมายเลขโทรศัพท์ : {{ form.phone }}</p>
+        </p>
+        <button class="btn btn-success" type="submit" >ยืนยัน</button>
+        &emsp;<a href="{% url 'profile' %}">ยกเลิก</a>
+    </form>
+</div>
+</div>
+
+</div>
+<br>
+{% endblock %}

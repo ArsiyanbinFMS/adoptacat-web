@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}AdoptaCat | คำขอของฉัน!{% endblock %}
+
+
+{% block content %}
+<br>
+<div class="container">
+
+<h2 style="text-align: center;"> คำขอของฉัน </h2>
+<table class="table table-bordered">
+    <tr class="table-secondary">
+        <td ><center>ชื่อแมว</center></td> 
+        <td ><center>วันที่ส่ง</center></td>
+        <td><center>ดูข้อมูลและสนทนา</center></td>
+    </tr>
+    {% for obj in mylist %}
+    <tr class="table">  
+        <td >{{ obj.cat }}</td> 
+        <td >{{ obj.date }}</td>
+        <td><center><a href="{% url 'request_info' obj.id %}"><i class="fas fa-eye"></i></a></center></td>
+    </tr> 
+    {% endfor %}
+    
+</table>
+</div>
+<br>
+</br>
+<br>
+</br>
+<br>
+</br>
+{% endblock %}
+
+
+

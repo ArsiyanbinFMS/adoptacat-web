@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}AdoptCat | ข้อมูลคำขอ!{% endblock %}
+
+
+{% block content %}
+<br>
+<div class="container">
+    <h1 style="text-align: center;">ข้อมูลคำขอรับเลี้ยงแมว</h1>
+    <p></p>
+    <div class="card flex-row flex-wrap">
+        <div class="card-header border-0">
+            <img src="{{ info.cat.image.url }}" alt="catpic">
+            
+        </div>
+        <div class="card-block px-5">
+            <p></p>
+            <h2 class="card-title">ชื่อ : {{ info.cat }}</h2>
+            <h2 class="card-title">ผู้ขอ : {{ info.requester }}</h2>
+            <div style="line-height: 5pt;">
+            <p><i class="far fa-clock"></i>ถูกเพิ่มเมื่อ :{{ info.cat.entrydate|date:"D d M Y" }}</p> 
+            <p><i class="far fa-clock"></i>ถูกรับเลี้ยงเมื่อ : {{ info.date }}</p>
+            </div>
+            <br></br>
+        </div>
+        
+        <div class="w-100">
+        <div class="card-footer w-100 text-muted">
+            <div style="font-size:small; line-height: 5pt;">
+              <h4>ข้อมูลจากผู้ขอ</h4><br></br>
+                <p class="card-text">location ที่จะรับเลี้ยงไป : {{ info.location }}</p>
+                <p class="card-text">ประเภทบ้าน : {{ info.housetype }}</p>
+                <p class="card-text">รั้วบ้าน : {{ info.fencedetail }}</p>
+                <p class="card-text">ค่าใช้จ่ายในการเลี้ยงที่รับได้ : {{ info.budget }}  บาท</p>
+                <p class="card-text">มีสัตว์เลี้ยงอยู่ : {{ info.pets }}</p>
+                <p class="card-text">ข้อความถึงเจ้าของแมวเเดิม : {{ info.message }}</p>
+                <p class="card-text">วันที่ส่งคำขอ : {{ info.date }}</p>
+                <p class="card-text">เบอร์ติดต่อ : {{ info.contact }}</p>
+                <p class="card-text">อีเมลติดต่อ : {{ info.email }}</p>
+                <p class="card-text">Social ID : {{ info.socail }}</p>
+            </div>
+        </div>
+        </div>
+            <br></br>
+        </div>
+    
+
+
+
+<div class="card card-body">
+  <div class="post-comments">
+      <!--comment count-->
+    <header>
+        <h3 class="h6">{{ ms.count }} Message{{ ms|pluralize }}</h3>
+      </header>
+    {% if request.user.is_authenticated %}
+        <form method="POST">
+          {% csrf_token %}
+          <div class="post-comments">
+            <label>ข้อความ :</label>
+            <p>&emsp;&emsp;
+            {{ message_form.content }}</p>
+          </div>
+          <div style="text-align: right;">
+          <input type="submit" role="button" class="btn btn-outline-success" value="ส่งข้อความ">
+          </div>
+        </form>
+    {% endif %}
+    <hr width="100%">
+    <!--comment view-->
+    {% for obj in ms %}
+    <div class="card card-body">
+      <blockquote class="blockquote">
+          <p class="mb-0">{{ obj.content }}</p>
+          <footer class="blockquote-footer">โดย :  {{ obj.user }}</footer>
+          <div style="font-size:x-small;"><i class="far fa-clock"></i> เมื่อ : {{ obj.timestamp }} ที่แล้ว</div>
+      </blockquote>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+</div>
+<br>
+{% endblock %}

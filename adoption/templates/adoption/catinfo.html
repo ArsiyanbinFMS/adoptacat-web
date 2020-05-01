@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}AdoptCat | ข้อมูลแมว!{% endblock %}
+
+
+{% block content %}
+<br>
+<div class="container">
+    <h1 style="text-align: center;">ข้อมูลแมว</h1>
+    <p></p>
+    <div class="card flex-row flex-wrap">
+        <div class="card-header border-0">
+            <img src="{{ catinfo.image.url }}" alt="catpic">
+            
+        </div>
+        <div class="card-block px-5">
+            <p></p>
+            <h2 class="card-title">ชื่อ : {{ catinfo.name }}</h2>
+            <p class="card-text">นิสัย : {{ catinfo.nature }}</p>
+            
+            <div style="font-size:small;">
+            <p class="card-text">อายุ : {{ catinfo.age }} เดือน</p>
+            <p class="card-text">เพศ : {{ catinfo.gender }}</p>
+             
+              <div style="font-size: x-small;">
+                {% for vac in catinfo.vaccines.all %}
+                  <p class="card-text" style="color: green; ">วัคซีนที่เคยได้รับ :&emsp;{{ vac }}</p>
+                {% endfor %}
+                <p class="card-text">สายพันธุ์ : {{ catinfo.breed }} </p>
+                <p class="card-text">สถานะการถูกรับเลี้ยง : {{ catinfo.status }}</p>
+              </div>
+                </div>
+            
+            
+            <br>
+        </div>
+        
+        <div class="w-100">
+        <div class="card-footer w-100 text-muted">
+            
+        <div style="text-align: right;">
+            <i class="far fa-clock"></i> โพสต์เมื่อ : {{ catinfo.entrydate|timesince }} 
+        </div>
+        <div style="text-align: right; font-size:small ;"><i class="fas fa-user"></i>  {{ catinfo.poster }} &emsp;<i class="fas fa-map-marker-alt"></i>  {{ catinfo.location }}
+                <p></p><!--adopt button-->
+                {% if catinfo.poster == user %}
+                    <div></div>
+                {% else %}
+                    <a href="#" class="btn btn-success" role="button" >ส่งคำขอรับเลี้ยง</a>
+                {% endif %}
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+
+<div class="card card-body">
+  <div class="post-comments">
+      <!--comment count-->
+    <header>
+        <h3 class="h6">{{ comments.count }} Comment{{ comments|pluralize }}</h3>
+      </header>
+    {% if request.user.is_authenticated %}
+      <form method="POST">
+        {% csrf_token %}
+        <div class="post-comments">
+          <label>ความคิดเห็น :</label>
+          <p>&emsp;&emsp;
+          {{ comment_form.content }}</p>
+        </div>
+        <div style="text-align: right;">
+        <input type="submit" role="button" class="btn btn-outline-success" value="เพิ่มความคิดเห็น">
+        </div>
+      </form>
+    {% endif %}
+    <hr width="100%">
+   <!--comment view-->
+    {% for comment in comments %}
+    <div class="card card-body">
+    <blockquote class="blockquote">
+        <p class="mb-0">{{ comment.content }}</p>
+        <footer class="blockquote-footer">โดย :  {{ comment.user|capfirst }}</footer>
+        <div style="font-size:x-small;"><i class="far fa-clock"></i> เมื่อ : {{ comment.timestamp }} ที่แล้ว</div>
+    </blockquote>
+</div>
+    {% endfor %}
+  </div>
+</div>
+
+
+  
+</div>
+<br>
+{% endblock %}

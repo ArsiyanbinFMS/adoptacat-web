@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}AdoptCat | แมวที่ถูกรับเลี้ยงแล้ว!{% endblock %}
+
+
+{% block content %}
+<br>
+
+<div class="container">
+  <h3 style="text-align: center;">แมวที่ถูกรับเลี้ยงแล้ว</h3>    
+<br></br>
+
+    <div class="row">
+      {% for obj in cat %}
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-0 shadow">
+          <img src="{{ obj.image.url }}" class="card-img-top" alt="cat_pic">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-0">{{ obj.name }}</h5>
+            <div class="card-text text-black-50">เพศ : {{ obj.gender }} </div>
+            <div class="card-text text-black-50">เพิ่มโดย : {{ obj.poster }} </div>
+            <small><div class="card-text text-black-50">Location : {{ obj.location }} </div>
+            <div class="date"><i class="icon-clock"> โพสต์เมื่อ : {{ obj.entrydate|timesince }} ที่แล้ว</i></div></small>
+          </div>
+        </div>
+      </div>
+      {% endfor %} 
+    </div>
+    <!-- /.row -->
+  </div>
+
+  <br>
+  <!-- /.container -->
+  {% endblock %}

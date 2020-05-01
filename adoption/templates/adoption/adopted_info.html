@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}AdoptCat | ข้อมูลการถูกรับเลี้ยง!{% endblock %}
+
+
+{% block content %}
+<br>
+
+<div class="container">
+  <h3 style="text-align: center;">ข้อมูลการถูกรับเลี้ยง!</h3>
+
+  <div class="card flex-row flex-wrap">
+    <div class="card-header border-0">
+        <img src="{{ info.cat.image.url }}" alt="catpic">
+    </div>
+    <div class="card-block px-5">
+        <p></p>
+        <h2 class="card-title">ชื่อ : {{ info.cat }}</h2>
+        <div style="text-align: right; line-height: 2pt;">
+            <i class="far fa-clock"></i> โพสต์เมื่อ : {{ info.cat.entrydate|date:"D d M Y" }} 
+            <p></p><i class="far fa-clock"></i> ถูกรับเลี้ยงเมื่อ : {{ info.date }}
+        </div>
+        <br></br>
+    </div>
+    
+    <div class="w-100">
+    <div class="card-footer w-100 text-muted">
+        <div style="font-size:small;">
+            <p class="card-text">location ที่ถูกรับเลี้ยงไป : {{ info.location }}</p>
+            <p class="card-text">ข้อมูลติดต่อผู้รับเลี้ยง : {{ info.date }}</p>
+            <p class="card-text">ชื่อผู้รับเลี้ยง : {{ info.adoptername }}</p></div>
+    </div>
+    </div>
+    <div style="text-align: center;">
+        <a href="{% url 'mycatlist' %}" class="btn btn-outline-primary btn-lg">กลับ</a>
+        <br></br>
+      </div>
+</div>
+
+<br></br>
+</div>
+{% endblock %}
